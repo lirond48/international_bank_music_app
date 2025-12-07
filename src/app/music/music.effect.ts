@@ -15,19 +15,13 @@ export class MusicEffects {
         this.musicService.searchDiscs(searchTerm).pipe(
           map(discs => loadMusicSuccess({ discs })),
           catchError(error =>
-            of(
-              loadMusicFailure({
-                error: error.message || 'Failed to load discs',
-              })
-            )
+            of(loadMusicFailure({ error: error.message || 'Failed to load discs' }))
           )
         )
       )
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private musicService: MusicService
-  ) {}
+  constructor(private actions$: Actions, private musicService: MusicService) {}
 }
+

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MusicState } from './music.state';
+import { MusicState } from './music.reducer';
 
 export const selectMusicState = createFeatureSelector<MusicState>('music');
 

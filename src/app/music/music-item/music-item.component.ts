@@ -5,8 +5,7 @@ import { Disc } from '../../interface/disc.interface';
 
 @Component({
   selector: 'music-item',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  standalone: false,
   templateUrl: './music-item.component.html',
   styleUrl: './music-item.component.scss'
 })

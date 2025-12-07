@@ -12,10 +12,9 @@ export interface SearchData {
 
 @Component({
   selector: 'music-options',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './music-options.component.html',
-  styleUrl: './music-options.component.scss'
+  styleUrl: './music-options.component.scss',
+  standalone: false
 })
 export class MusicOptionsComponent implements OnInit {
   searchForm!: FormGroup;

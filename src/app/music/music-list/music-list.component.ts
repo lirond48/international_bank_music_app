@@ -4,21 +4,26 @@ import { MusicService } from '../../service/music.service';
 import { Disc } from '../../interface/disc.interface';
 import { MusicItemComponent } from "../music-item/music-item.component";
 import { MusicOptionsComponent, SearchData } from "../music-options/music-options.component";
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectDiscs } from '../music.selector';
 
 @Component({
   selector: 'music-list',
-  standalone: true,
-  imports: [CommonModule, MusicItemComponent, MusicOptionsComponent],
+  standalone: false,
   templateUrl: './music-list.component.html',
   styleUrl: './music-list.component.scss'
 })
 export class MusicListComponent implements OnInit {
+  disc2$: Observable<Disc[]>;
   discs = signal<Disc[]>([]);
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
   searchTerm = '';
 
-  constructor(private musicService: MusicService) {}
+  constructor(private musicService: MusicService, private store: Store) {
+    this.disc2$ = this.store.select(selectDiscs);
+  }
 
   ngOnInit(): void {
     this.loadDiscs();

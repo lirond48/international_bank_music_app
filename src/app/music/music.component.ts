@@ -1,11 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MusicListComponent } from "./music-list/music-list.component";
 
 @Component({
   selector: 'app-music',
-  standalone: true,
-  imports: [CommonModule, MusicListComponent],
+  standalone: false,
   templateUrl: './music.component.html',
   styleUrl: './music.component.scss'
 })
