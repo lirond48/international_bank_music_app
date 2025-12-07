@@ -1,0 +1,11 @@
+<div class="disc-card" (click)="onItemClick()">
+  <img [src]="disc.coverUrl" [alt]="disc.title" class="disc-cover" />
+  <div class="disc-info">
+    <h3 class="disc-title">{{ disc.title }}</h3>
+    <p class="disc-artist">{{ disc.artist }}</p>
+    @if (disc.releaseYear) {
+      <p class="disc-year">{{ disc.releaseYear }}</p>
+    }
+  </div>
+</div>
+  

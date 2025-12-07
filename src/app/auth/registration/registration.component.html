@@ -1,0 +1,92 @@
+<div class="registration-container">
+  <div class="registration-card">
+    <h1>User Registration</h1>
+    
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.invalid]="email?.invalid && email?.touched"
+          placeholder="Enter your email"
+        />
+        @if (email?.invalid && email?.touched) {
+          <div class="error-message">
+            @if (email?.errors?.['required']) {
+              <span>Email is required</span>
+            }
+            @if (email?.errors?.['invalidEmail']) {
+              <span>Please enter a valid email address</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          [class.invalid]="username?.invalid && username?.touched"
+          placeholder="Enter your username"
+        />
+        @if (username?.invalid && username?.touched) {
+          <div class="error-message">
+            @if (username?.errors?.['required']) {
+              <span>Username is required</span>
+            }
+            @if (username?.errors?.['startsWithNumber']) {
+              <span>Username cannot start with a number</span>
+            }
+            @if (username?.errors?.['invalidUsername']) {
+              <span>Username can only contain English characters and numbers (no spaces)</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [class.invalid]="password?.invalid && password?.touched"
+          placeholder="Enter your password"
+        />
+        @if (password?.invalid && password?.touched) {
+          <div class="error-message">
+            @if (password?.errors?.['required']) {
+              <span>Password is required</span>
+            }
+            @if (password?.errors?.['hasSpaces']) {
+              <span>Password cannot contain spaces</span>
+            }
+            @if (password?.errors?.['noUppercase']) {
+              <span>Password must contain at least one uppercase letter</span>
+            }
+            @if (password?.errors?.['noNumber']) {
+              <span>Password must contain at least one number</span>
+            }
+          </div>
+        }
+      </div>
+
+      <button type="submit" class="submit-button" [disabled]="registrationForm.invalid"> Register </button>
+    </form>
+
+    <div class="back-link">
+      <a routerLink="/music">Back to Music</a>
+    </div>
+  </div>
+</div>
+

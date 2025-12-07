@@ -19,14 +19,15 @@ interface ITunesResponse {
 @Injectable({ providedIn: 'root' })
 export class MusicService {
   private readonly apiUrl = 'https://itunes.apple.com/search';
+  private lookupUrl = 'https://itunes.apple.com/lookup';
 
   constructor(private http: HttpClient) {}
 
   searchDiscs(term: string): Observable<Disc[]> {
     const params = new HttpParams()
       .set('term', term)
-      .set('entity', 'album')
-      .set('limit', 20);
+      .set('entity', 'song')
+      .set('limit', 30);
 
     return this.http.get<ITunesResponse>(this.apiUrl, { params }).pipe(
       map(res =>
@@ -38,6 +39,27 @@ export class MusicService {
           releaseYear: album.releaseDate?.substring(0, 4)
         }) as Disc)
       )
+    );
+  }
+
+  getDiscById(id: number): Observable<Disc | null> {
+    const params = new HttpParams()
+      .set('id', id)
+      .set('entity', 'song');
+  
+    return this.http.get<ITunesResponse>(this.lookupUrl, { params }).pipe(
+      map(res => {
+        const album = res.results[0];
+        if (!album) return null;
+  
+        return {
+          id: album.collectionId,
+          title: album.collectionName,
+          artist: album.artistName,
+          coverUrl: album.artworkUrl100,
+          releaseYear: album.releaseDate?.substring(0, 4),
+        } as Disc;
+      })
     );
   }
 }

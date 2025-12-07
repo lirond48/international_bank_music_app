@@ -1,0 +1,89 @@
+.music-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  
+    h2 {
+      margin-bottom: 24px;
+      color: #333;
+      font-size: 28px;
+    }
+  
+    .loading,
+    .error,
+    .no-discs {
+      text-align: center;
+      padding: 40px;
+      font-size: 18px;
+    }
+  
+    .error {
+      color: #d32f2f;
+      background-color: #ffebee;
+      border-radius: 4px;
+      padding: 16px;
+    }
+  
+    .loading {
+      color: #666;
+    }
+  
+    .discs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+  
+    .disc-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+  
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+  
+      .disc-cover {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+  
+      .disc-info {
+        padding: 16px;
+  
+        .disc-title {
+          margin: 0 0 8px 0;
+          font-size: 16px;
+          font-weight: 600;
+          color: #333;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+  
+        .disc-artist {
+          margin: 0 0 4px 0;
+          font-size: 14px;
+          color: #666;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+  
+        .disc-year {
+          margin: 4px 0 0 0;
+          font-size: 12px;
+          color: #999;
+        }
+      }
+    }
+  }
+  
+  

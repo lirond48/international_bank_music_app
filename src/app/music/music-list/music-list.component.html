@@ -1,33 +1,28 @@
+<h2>Music Discs</h2>
+<div>
+  <music-options (onSubmit)="onSearch($event)"></music-options>
+</div>
+
 <div class="music-container">
-    <h2>Music Discs</h2>
-  
-    @if (loading()) {
-      <div class="loading">Loading discs...</div>
+
+  @if (loading()) {
+    <div class="loading">Loading discs...</div>
+  }
+
+  @if (error()) {
+    <div class="error">{{ error() }}</div>
+  }
+
+  @if (!loading() && !error()) {
+    @if (discs().length > 0) {
+      <div class="discs-grid">
+        @for (disc of discs(); track disc.id) {
+          <music-item [disc]="disc"></music-item>
+        }
+      </div>
+    } @else {
+      <div class="no-discs">No discs found.</div>
     }
-  
-    @if (error()) {
-      <div class="error">{{ error() }}</div>
-    }
-  
-    @if (!loading() && !error()) {
-      @if (discs().length > 0) {
-        <div class="discs-grid">
-          @for (disc of discs(); track disc.id) {
-            <div class="disc-card">
-              <img [src]="disc.coverUrl" [alt]="disc.title" class="disc-cover" />
-              <div class="disc-info">
-                <h3 class="disc-title">{{ disc.title }}</h3>
-                <p class="disc-artist">{{ disc.artist }}</p>
-                @if (disc.releaseYear) {
-                  <p class="disc-year">{{ disc.releaseYear }}</p>
-                }
-              </div>
-            </div>
-          }
-        </div>
-      } @else {
-        <div class="no-discs">No discs found.</div>
-      }
-    }
-  </div>
+  }
+</div>
   

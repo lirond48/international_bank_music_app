@@ -1,0 +1,19 @@
+<header class="header">
+  <div class="header-container">
+    <div class="logo-section" (click)="navigateToMusic()">
+      <h1 class="logo">Music App</h1>
+    </div>
+    
+    <nav class="nav-section">
+      @if (userData) {
+        <div class="user-info">
+          <span class="username">Welcome, {{ userData.username }}</span>
+        </div>
+      }
+      <button class="register-button" (click)="navigateToRegister()">
+        {{ userData ? 'Register New User' : 'Register' }}
+      </button>
+    </nav>
+  </div>
+</header>
+

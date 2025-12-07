@@ -1,0 +1,32 @@
+<div class="details-container">
+  @if (disc$ | async; as disc) {
+    <button class="back-button" (click)="goBack()">← Back to List</button>
+    
+    <div class="disc-details">
+      <div class="disc-image">
+        <img [src]="disc.coverUrl" [alt]="disc.title" class="cover-image" />
+      </div>
+      
+      <div class="disc-content">
+        <h1 class="disc-title">{{ disc.title }}</h1>
+        <h2 class="disc-artist">{{ disc.artist }}</h2>
+        
+        @if (disc.releaseYear) {
+          <p class="disc-year">
+            <strong>Release Year:</strong> {{ disc.releaseYear }}
+          </p>
+        }
+        
+        <p class="disc-id">
+          <strong>Collection ID:</strong> {{ disc.id }}
+        </p>
+      </div>
+    </div>
+  } @else {
+    <div class="loading">
+      <p>Loading details...</p>
+      <button class="back-button" (click)="goBack()">← Back to List</button>
+    </div>
+  }
+</div>
+
