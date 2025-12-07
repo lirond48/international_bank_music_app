@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Router, RouterModule, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 import { UserService, UserData } from '../service/user.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { UserService, UserData } from '../service/user.service';
 })
 export class HeaderComponent implements OnInit {
   userData: UserData | null = null;
+  currentRoute: string = '';
 
   constructor(
     private router: Router,
@@ -21,16 +22,34 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserData();
+    this.updateCurrentRoute();
     
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.loadUserData();
+        this.updateCurrentRoute();
       });
   }
 
   private loadUserData(): void {
     this.userData = this.userService.getUserData();
+  }
+
+  private updateCurrentRoute(): void {
+    const url = this.router.url;
+    
+    if (url.startsWith('/music/') && url !== '/music') {
+      // Extract ID from route like /music/123
+      const id = url.split('/music/')[1];
+      this.currentRoute = `Music Details (ID: ${id})`;
+    } else if (url === '/music') {
+      this.currentRoute = 'Music Library';
+    } else if (url === '/register') {
+      this.currentRoute = 'User Registration';
+    } else {
+      this.currentRoute = 'Home';
+    }
   }
 
   navigateToRegister(): void {
