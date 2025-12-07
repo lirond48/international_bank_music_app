@@ -19,7 +19,9 @@ export class MusicItemComponent implements OnInit {
   }
 
   onItemClick(): void {
-    this.router.navigate(['/music', this.disc.id]);
+    if(this.disc.id) {
+      this.router.navigate(['/music', this.disc.id]);
+    }
   }
 
 }

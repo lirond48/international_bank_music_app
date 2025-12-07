@@ -2,9 +2,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MusicService } from '../../service/music.service';
 import { Disc } from '../../interface/disc.interface';
-import { Store } from '@ngrx/store';
 import { MusicItemComponent } from "../music-item/music-item.component";
-import { MusicOptionsComponent } from "../music-options/music-options.component";
+import { MusicOptionsComponent, SearchData } from "../music-options/music-options.component";
 
 @Component({
   selector: 'music-list',
@@ -25,14 +24,13 @@ export class MusicListComponent implements OnInit {
     this.loadDiscs();
   }
 
-  loadDiscs(searchTerm: string = 'music'): void {
+  loadDiscs(searchTerm: string = 'music', entityType: string = 'album'): void {
     this.loading.set(true);
     this.error.set(null);
 
-    this.musicService.searchDiscs(searchTerm).subscribe({
+    this.musicService.searchDiscs(searchTerm, entityType).subscribe({
       next: (discs) => {
         this.discs.set(discs);
-        console.log(discs);
         this.loading.set(false);
       },
       error: (err) => {
@@ -43,10 +41,8 @@ export class MusicListComponent implements OnInit {
     });
   }
 
-  onSearch(event: string): void {
-    console.log(event);
-    const term = this.searchTerm.trim() || 'music';
-    this.loadDiscs(event);
+  onSearch(searchData: SearchData): void {
+    this.loadDiscs(searchData.searchTerm.length ? searchData.searchTerm : 'music', searchData.entityType);
   }
 }
 

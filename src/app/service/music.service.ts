@@ -23,10 +23,10 @@ export class MusicService {
 
   constructor(private http: HttpClient) {}
 
-  searchDiscs(term: string): Observable<Disc[]> {
+  searchDiscs(term: string, entityType: string = 'album'): Observable<Disc[]> {
     const params = new HttpParams()
       .set('term', term)
-      .set('entity', 'song')
+      .set('entity', entityType)
       .set('limit', 30);
 
     return this.http.get<ITunesResponse>(this.apiUrl, { params }).pipe(
@@ -43,9 +43,7 @@ export class MusicService {
   }
 
   getDiscById(id: number): Observable<Disc | null> {
-    const params = new HttpParams()
-      .set('id', id)
-      .set('entity', 'song');
+    const params = new HttpParams().set('id', id)
   
     return this.http.get<ITunesResponse>(this.lookupUrl, { params }).pipe(
       map(res => {
