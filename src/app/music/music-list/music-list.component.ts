@@ -15,14 +15,12 @@ import { selectDiscs } from '../music.selector';
   styleUrl: './music-list.component.scss'
 })
 export class MusicListComponent implements OnInit {
-  disc2$: Observable<Disc[]>;
   discs = signal<Disc[]>([]);
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
   searchTerm = '';
 
-  constructor(private musicService: MusicService, private store: Store) {
-    this.disc2$ = this.store.select(selectDiscs);
+  constructor(private musicService: MusicService) {
   }
 
   ngOnInit(): void {

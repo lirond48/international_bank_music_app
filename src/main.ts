@@ -16,9 +16,6 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    provideEffects([MusicEffects]),   // ✅ register effects here
-    provideStore({ music: musicReducer }),
-    provideStoreDevtools({ maxAge: 25, logOnly: false }),
-    importProvidersFrom(MusicModule)  // ✅ bring in your non‑standalone components
+    importProvidersFrom(MusicModule)
   ]
 });
