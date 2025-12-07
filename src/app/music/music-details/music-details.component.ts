@@ -7,8 +7,7 @@ import { MusicService } from '../../service/music.service';
 
 @Component({
   selector: 'music-details',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  standalone: false,
   templateUrl: './music-details.component.html',
   styleUrl: './music-details.component.scss'
 })

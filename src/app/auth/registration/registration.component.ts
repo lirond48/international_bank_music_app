@@ -6,8 +6,7 @@ import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-registration',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  standalone: false,
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss'
 })

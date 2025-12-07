@@ -14,8 +14,7 @@ export const initialState: MusicState = {
   error: null
 };
 
-export const musicReducer = createReducer(
-  initialState,
+export const musicReducer = createReducer(initialState,
   on(MusicActions.loadMusic, (state) => ({
     ...state,
     loading: true,

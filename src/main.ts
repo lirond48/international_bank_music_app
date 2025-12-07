@@ -1,29 +1,21 @@
-// src/main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-
-import { routes } from './app/app.routes';
-
+import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { importProvidersFrom } from '@angular/core';
 
-import { musicReducer } from './app/music/music.state';
+import { routes } from './app/app.routes';
 import { MusicEffects } from './app/music/music.effect';
+import { MusicModule } from './app/music/music.module';
+import { musicReducer } from './app/music/music.reducer';
 import { AppComponent } from './app/app';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(),
     provideRouter(routes),
-
-    provideStore({ music: musicReducer }),
-    provideEffects([MusicEffects]),
-
-    provideStoreDevtools({
-      maxAge: 25,
-      logOnly: false,
-    }),
-  ],
-}).catch(err => console.error(err));
+    provideHttpClient(),
+    importProvidersFrom(MusicModule)
+  ]
+});
